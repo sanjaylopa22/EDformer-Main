@@ -1,5 +1,5 @@
-# EDformer - A lightweight reverse embedded transformer model
-
+# EDformer: Embedded Decomposed Transformer for Explainable Multivariate Time Series Forecasting
+### EDformer: https://arxiv.org/abs/2412.12227
 ### [Time-Series-Library (TSlib)](https://github.com/thuml/Time-Series-Library)
 
-TSlib is an open-source library for deep learning researchers, especially deep time series analysis.
+Time series forecasting is a crucial challenge with significant applications in areas such as weather prediction, stock market analysis, and scientific simulations. This paper introduces an embedded decomposed transformer, 'EDformer', for multivariate time series forecasting tasks. Without altering the fundamental elements, we reuse the Transformer architecture and consider the capable functions of its constituent parts in this work. Edformer first decomposes the input multivariate signal into seasonal and trend components. Next, the prominent multivariate seasonal component is reconstructed across the reverse dimensions, followed by applying the attention mechanism and feed-forward network in the encoder stage. In particular, the feed-forward network is used for each variable frame to learn nonlinear representations, while the attention mechanism uses the time points of individual seasonal series embedded within variate frames to capture multivariate correlations. Therefore, the trend signal is added with projection, and the final forecasting is performed. The EDformer model obtains state-of-the-art predicting results in terms of accuracy and efficiency on complex real-world time series datasets.
