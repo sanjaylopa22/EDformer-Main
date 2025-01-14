@@ -47,57 +47,6 @@ class DSAttention(nn.Module):
             return V.contiguous(), None
 
 
-class FuzzyAttention(nn.Module):
-    def __init__(self, mask_flag=True, factor=5, scale=None, attention_dropout=0.1, output_attention=False, delta=0.5):
-        super(FuzzyAttention, self).__init__()
-        self.scale = scale
-        self.mask_flag = mask_flag
-        self.output_attention = output_attention
-        self.dropout = nn.Dropout(attention_dropout)
-        self.delta = delta  # Fuzziness factor
-
-    def forward(self, queries, keys, values, attn_mask, tau=None, delta=None):
-        """
-        Forward pass for the Fuzzy Attention.
-
-        :param queries: Query tensor of shape (B, L, H, E)
-        :param keys: Key tensor of shape (B, S, H, D)
-        :param values: Value tensor of shape (B, S, H, D)
-        :param attn_mask: Mask to apply attention to certain locations
-        :param tau: Temperature scaling factor (optional)
-        :param delta: Fuzziness adjustment factor (optional, defaults to self.delta)
-        :return: The computed attention output and optionally the attention weights
-        """
-        # Default delta value if not provided
-        delta = delta or self.delta
-        
-        B, L, H, E = queries.shape
-        _, S, _, D = values.shape
-        scale = self.scale or 1. / sqrt(E)
-        
-        # Compute attention scores
-        scores = torch.einsum("blhe,bshe->bhls", queries, keys)
-
-        if self.mask_flag:
-            if attn_mask is None:
-                attn_mask = TriangularCausalMask(B, L, device=queries.device)
-            scores.masked_fill_(attn_mask.mask, -np.inf)
-
-        # Add fuzziness to the attention scores
-        fuzzy_scores = scores + delta * torch.randn_like(scores)
-
-        # Apply softmax to the adjusted fuzzy scores
-        A = self.dropout(F.softmax(scale * fuzzy_scores, dim=-1))
-
-        # Compute the output using the attention weights
-        V = torch.einsum("bhls,bshd->blhd", A, values)
-
-        if self.output_attention:
-            return V.contiguous(), A
-        else:
-            return V.contiguous(), None
-
-
 class FullAttention(nn.Module):
     def __init__(self, mask_flag=True, factor=5, scale=None, attention_dropout=0.1, output_attention=False):
         super(FullAttention, self).__init__()
