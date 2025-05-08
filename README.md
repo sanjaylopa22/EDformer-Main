@@ -132,4 +132,4 @@ If you have any questions or suggestions, feel free to contact our maintenance t
 Current:
 
 Sanjay Chakraborty (Postdoc, sanjay.chakraborty@liu.se)
-Ibrahim Delibasoglu (Postdoc, ibrahim.delibasoglu@liu.se)
+Ibrahim Delibasoglu (Postdoc)
