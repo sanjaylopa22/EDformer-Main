@@ -1,13 +1,14 @@
 import os
 import torch
-from models import EDformer
+from models import EDformer, EDformer_frequency
 
 
 class Exp_Basic(object):
     def __init__(self, args):
         self.args = args
         self.model_dict = {
-            'EDformer': EDformer
+            'EDformer': EDformer,
+            'EDformer_frequency':EDformer_frequency,
         }
         if args.model == 'Mamba':
             print('Please make sure you have successfully installed mamba_ssm')
