@@ -41,7 +41,7 @@ python -u run.py \
   --root_path ./dataset/m4 \
   --seasonal_patterns 'Monthly' \
   --model_id m4_Monthly \
-  --model EDformer \
+  --model EDformer_freq \
   --data m4 \
   --features M \
   --e_layers 2 \
