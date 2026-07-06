@@ -13,6 +13,7 @@ TSlib is an open-source library for deep learning researchers, especially deep t
 
 Use the [run.py](/run.py) script to train and test the time series models. Check the [scripts](/scripts/) and [slurm](/slurm/) folder to see sample scripts. Make sure you have the datasets downloaded in the `dataset` folder following the `Datasets` section. Following is a sample code to train the electricity dataset using the DLinear model. To test an already trained model, just remove the `--train` parameter.
 
+## EDformerAP model execution script
 python -u run.py \
   --task_name long_term_forecast \
   --is_training 1 \
@@ -56,6 +57,31 @@ python -u run.py \
   --itr 1 \
   --learning_rate 0.001 \
   --loss 'SMAPE'
+
+## EDformerFA model execution script
+python -u run.py \
+  --task_name long_term_forecast \
+  --is_training 1 \
+  --root_path ./dataset/exchange_rate/ \
+  --data_path exchange_rate.csv \
+  --model_id Exchange_96_96 \
+  --model EDformer_frequency \
+  --data custom \
+  --features M \
+  --seq_len 96 \
+  --label_len 48 \
+  --pred_len 96 \
+  --e_layers 2 \
+  --d_layers 1 \
+  --factor 3 \
+  --enc_in 8 \
+  --dec_in 8 \
+  --c_out 8 \
+  --des 'Exp' \
+  --itr 1 \
+  --alpha 0.1 \
+  --learnable_alpha 0 \
+  --taper_ratio 0.1
   
 ## Datasets
 
