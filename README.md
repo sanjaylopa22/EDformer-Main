@@ -64,7 +64,7 @@ python -u run.py \
   --is_training 1 \
   --root_path ./dataset/exchange_rate/ \
   --data_path exchange_rate.csv \
-  --model_id Exchange_96_96 \
+  --model_id Exchange_96_96_learnable \
   --model EDformer_frequency \
   --data custom \
   --features M \
@@ -77,10 +77,10 @@ python -u run.py \
   --enc_in 8 \
   --dec_in 8 \
   --c_out 8 \
-  --des 'Exp' \
+  --des 'Exp_learnable_alpha' \
   --itr 1 \
   --alpha 0.1 \
-  --learnable_alpha 0 \
+  --learnable_alpha 1 \
   --taper_ratio 0.1
   
 ## Datasets
